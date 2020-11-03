@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BufferOverflow - Register</title>
+    <link rel="stylesheet" href="css/style_register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <section id="register">
+        <h3 id="abb_register">Register</h3>
+        <form action="/register" method="POST">
+            <div style="display: flex; align-items: center; height: 20px;">
+                <p style="color: #ef2929"><%= error %></p>
+            </div>
+            <div id="username_div">
+                <h3>Username</h3>
+                <input type="username" name="username" id="username" value="<%= username %>">
+            </div>
+            <div id="email_div">
+                <h3>Email</h3>
+                <input type="email" name="email" id="email" value="<%= email %>">
+            </div>
+            <div id="college_div">
+                <h3>College</h3>
+                <input type="text" name="college" id="college" value="<%= college %>">
+            </div>
+            <div id="college_info">
+                <div id="year_div">
+                    <h3>Year</h3>
+                    <input type="number" name="year" id="year" value="<%= year %>">
+                </div>
+                <div id="roll_no_div">
+                    <h3>Roll No.</h3>
+                    <input type="number" name="roll_no" id="number" value="<%= roll_no %>">
+                </div>
+            </div>
+            <div id="password_div">
+                <h3>Password</h3>
+                <input type="password" name="password" id="password" value="<%= password %>">
+            </div>
+            <div id="register_button_div">
+                <button id="register_button" type="submit">Register</button>
+            </div>
+        </form>
+        <div id="register_reset_div">
+            <span>Already have an account? Click&nbsp;</span>
+            <a href="">here.</a>
+        </div>
+    </section>
+</body>
+</html>

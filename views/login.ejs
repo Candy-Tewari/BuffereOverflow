@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BufferOverflow - Login</title>
+    <link rel="stylesheet" href="css/style_login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <Section id="login">
+        <h3 id="abb_login">Login</h3>
+        <form action="/login" method="POST">
+            <div style="display: flex; align-items: center; height: 20px;">
+                <p style="color: #ef2929"><%= error %></p>
+            </div>
+            <div id="email_div">
+                <h3>Email</h3>
+                <input type="email" name="email" id="email">
+            </div>
+            <div id="password_div">
+                <h3>Password</h3>
+                <input type="password" name="password" id="password">
+            </div>
+            <div id="login_button_div">
+                <button id="login_button" type="submit">Login</button>
+            </div>
+        </form>
+        <div id="password_reset_div">
+            <span>If you don't remember your password click&nbsp;</span>
+            <a href="">here.</a>
+        </div>
+    </Section>
+</body>
+</html>

@@ -1,0 +1,186 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: #000;
+}
+
+header{
+    display: flex;
+    height: 70px;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #92c213;
+    box-shadow: 0px 0px 10px #9acc14;
+}
+
+#logo{
+    font-family: 'Bungee', cursive;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+header nav{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+#navList{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 50%;
+    justify-content: space-around;
+}
+
+.navitem{
+    text-decoration: none;
+}
+
+.navitem a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.navitem a:hover{
+    color: #9acc14;
+    filter: brightness(95%);
+    transition: 0.3s;
+}
+
+#join_now_button{
+    background-color: #9acc14;
+    border-radius: 3px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    border: 1px solid #9acc14;
+    cursor: pointer;
+}
+
+#join_now_button:hover{
+    background-color: #92c213;
+}
+
+#register{
+    background-color: #1e2125;
+    border: 1px solid  #92c213;
+    box-shadow: 0px 0px 10px #92c213;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 2%;
+    width: 28vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 580px;
+}
+
+#abb_register{
+    color: #92c213;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#register form{
+    display: flex;
+    flex-direction: column;
+}
+
+#register div{
+    margin: 10px 20px;
+}
+
+#register form h3{
+    color: white;
+    font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+#register form input{
+    background-color: #292e33;
+    color: #92c213;
+    border: none;
+    height: 34px;
+    width: 24vw;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+#register_button_div{
+    display: flex;
+    width: 24vw;
+    justify-content: flex-end;
+}
+
+#register_button{
+    background-color: transparent;
+    color: white;
+    border: 1px solid #92c213;
+    padding: 8px 40px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#register_button:hover{
+    background-color: rgba(154,204,20,.1);
+    transition: 0.4s;
+}
+
+#register_reset_div{
+    color: #737373;
+    font-size: 85%;
+    margin: 5px 20px;
+}
+
+#register_reset_div a{
+    color: #92c213;
+    text-decoration: none;
+}
+
+#college_info{
+    display: flex;
+    margin-top: 5px !important;
+    margin-left: 20px;
+}
+
+#year_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+#year{
+    width: 120px !important;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+#roll_no_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+#number{
+    width: 120px !important;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}

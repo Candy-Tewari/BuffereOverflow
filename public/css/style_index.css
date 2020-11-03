@@ -1,0 +1,129 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#welcome{
+    background-color: #000;
+    min-height: 100vh;
+    color: white;
+}
+
+header{
+    display: flex;
+    height: 70px;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #92c213;
+    box-shadow: 0px 0px 10px #9acc14;
+}
+
+#logo{
+    font-family: 'Bungee', cursive;
+    display: flex;
+    align-items: center;
+}
+
+header nav{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+#navList{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    width: 50%;
+    justify-content: space-around;
+}
+
+.navitem{
+    text-decoration: none;
+}
+
+.navitem a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.navitem a:hover{
+    color: #9acc14;
+    filter: brightness(95%);
+    transition: 0.3s;
+}
+
+#join_now_button{
+    background-color: #9acc14;
+    border-radius: 3px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    border: 1px solid #9acc14;
+    cursor: pointer;
+}
+
+#join_now_button:hover{
+    background-color: #92c213;
+}
+
+#attractive_welcome{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20vh !important;
+    font-size: 4rem;
+}
+
+#delema{
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#ques{
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+#answering{
+    color: #ef2929 !important;
+    font-size: 36px;
+    font-weight: 100;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#next_answer{
+    color: #92c213;
+    font-size: 36px;
+    font-weight: 100;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#choices{
+    margin-top: 10vh;
+}
+
+#choices span{
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid white;
+    padding: 14px 28px;
+    border-radius: 25px;
+    margin: 0px 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#choices span:hover{
+    border: 1px solid #92c213;
+    color: #9acc14;
+    transition: 0.45s;
+}
