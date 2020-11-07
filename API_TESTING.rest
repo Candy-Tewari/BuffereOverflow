@@ -1,0 +1,22 @@
+GET http://localhost/ 
+
+###
+
+POST http://localhost/login 
+Content-Type: application/json
+
+{
+    "email" : "sansshobhit@yahoo.com",
+    "password" : "7QeDwUtADUwTQ45"
+}
+
+###
+
+GET http://localhost/user/dashboard
+Cookie: dontseethis eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhc2UzIiwiaWF0IjoxNjA0NDgwODE2LCJleHAiOjE2MDQ0ODA4NzZ9._WlNmNxXgaok9bgNwz3_ZXuEQp4NdmFJi1TM2nUkWHQ icantseeyou eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhc2UzIiwiaWF0IjoxNjA0NDgwODE2LCJleHAiOjE2MDcwNzI4MTZ9.ULpl8l8Q-2giu7CXNzw7XohpJOw6bmfNYWxIqVr2AaU
+
+###
+
+POST http://localhost/user/logout
+
+###

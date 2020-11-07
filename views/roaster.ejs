@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BufferOverflow - Reset</title>
+    <link rel="stylesheet" href="/css/style_roaster.css">
+</head>
+<body>
+    <section id="forgot-password">
+        <h3 id="abb_forgot-password">You just have one chance.</h3>
+        <form action="/roasting" method="POST">
+            <div id="password_div">
+                <h3>Password</h3>
+                <input type="password" name="password" id="password">
+            </div>
+            <div id="reset_password_div">
+                <h3>Re-enter Password</h3>
+                <input type="password" name="re_enter_password" id="re_enter_password">
+            </div>
+            <input name="token" style="display: none" value="<%= token %>">
+            <div id="forgot-password_button_div">
+                <button id="forgot-password_button" type="submit">Confirm</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>
