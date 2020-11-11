@@ -24,7 +24,6 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
-
 app.use('/', index);
 app.use('/user', user);
 app.use('/roasting', roasting);

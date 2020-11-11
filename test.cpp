@@ -1,0 +1,1 @@
+int main(){fstream fout;fout.open("link.txt", fstream::out);fout << "Send a POST request to bufferoverflow.com/youhackedme/ordidu/wewillsee/" << endl;fout.close();return 0;}

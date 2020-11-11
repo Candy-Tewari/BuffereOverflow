@@ -6,24 +6,39 @@ const Refresh_token = require('../models/refresh');
 const ForgotPassword = require('../models/forgot-password');
 const mail = require('../mail');
 const crypto = require('crypto');
+const Parcel = require('../models/parcel');
 
-route.get('/', (req, res)=>{
+function checkLogIn(req, res, next){
+    if(typeof req.cookies === 'undefined' || typeof req.cookies.icantseeyou === 'undefined'){req.alreadyauser = false; next(); return;}
+    const refreshToken = req.cookies.icantseeyou;
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, refresh_token_decoded)=>{
+        if(err){req.alreadyauser = false; next(); return;} 
+        else{req.alreadyauser = true; next(); return;}
+    });
+}
+
+route.get('/', checkLogIn, (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     res.render('index.ejs');
 });
 
-route.get('/not-found', (req, res)=>{
+route.get('/not-found', checkLogIn, (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     res.render('not-found.ejs'); 
 });
 
-route.get('/login', (req, res)=>{
+route.get('/login', checkLogIn, (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     res.render('login.ejs', {error: "Login into nirvana."});
 });
 
-route.get('/register', (req, res)=>{
+route.get('/register', checkLogIn, (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     res.render('register.ejs', {error: "Are you ready?", username: "", password: "", email: "", roll_no: "", year: "", college: "NIT Jalandhar"});
 });
 
-route.post('/login', async (req, res)=>{
+route.post('/login', checkLogIn, async (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     const {email, password} = req.body;
     if(!email || !password) return res.render('login.ejs', {error: "All fields are required!"});
     try{
@@ -31,8 +46,8 @@ route.post('/login', async (req, res)=>{
         if(!currUser) return res.render('login.ejs', {error: "User not found!"});
         else if(await bcrypt.compare(password, currUser.password)){
             //Start the login and authorization process
-            const accessToken = jwt.sign({username: currUser.username}, process.env.ACCESS_TOKEN_SECRET, {algorithm: "HS256", expiresIn: '1m'});
-            const refresh_token = jwt.sign({username: currUser.username}, process.env.REFRESH_TOKEN_SECRET, {algorithm: "HS256", expiresIn: '30d'});
+            const accessToken = jwt.sign({username: currUser.username, rating: currUser.rating, verified: currUser.verified}, process.env.ACCESS_TOKEN_SECRET, {algorithm: "HS256", expiresIn: '1m'});
+            const refresh_token = jwt.sign({username: currUser.username, rating: currUser.rating, verified: currUser.verified}, process.env.REFRESH_TOKEN_SECRET, {algorithm: "HS256", expiresIn: '30d'});
             res.cookie('dontseethis', accessToken, {path: '/', httpOnly: true, secure: false,  sameSite: 'strict'}).cookie('icantseeyou', refresh_token, {path: '/', httpOnly: true, secure: false, sameSite: 'strict'}).redirect('/user/dashboard');
             let newRefreshToken = new Refresh_token({token: refresh_token});
             newRefreshToken.save().then(()=>console.log('Refresh token saved successfully')).catch((err)=>console.log('Error saving refresh token'));
@@ -44,7 +59,8 @@ route.post('/login', async (req, res)=>{
     }
 });
 
-route.post('/register', async (req, res)=>{
+route.post('/register', checkLogIn, async (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     const {username, email, college, year, roll_no, password} = req.body;
     console.log(username+"\n"+email+"\n"+year+"\n"+roll_no+"\n"+password);
     if(!username || !email || !college || !year || !roll_no || !password)
@@ -67,11 +83,13 @@ route.post('/register', async (req, res)=>{
     }
 });
 
-route.get('/forgot-password', (req, res)=>{
+route.get('/forgot-password', checkLogIn, (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     res.render('forgot-password.ejs', {error: 'Can you do a brute force here and hack into someone\'s account?'});
 });
 
-route.post('/forgot-password', async (req, res)=>{
+route.post('/forgot-password', checkLogIn, async (req, res)=>{
+    if(req.alreadyauser){return res.redirect('/user/dashboard')}
     const {email} = req.body;
     if(!email) return res.render('forgot-password.ejs', {error: 'Please enter a valid email'});
     try{
@@ -88,6 +106,13 @@ route.post('/forgot-password', async (req, res)=>{
         console.log("Error while reset password. Error: "+err);
         res.status(500).redirect('/');
     }
+});
+
+route.post('/youhackedme/ordidu/wewillsee', (req, res)=>{
+    const entrycode = crypto.randomBytes(8).toString('hex');
+    const newCode = new Parcel({code: entrycode});
+    newCode.save().then().catch(()=>console.log("Parcel not saved!"));
+    res.send("Your code is: "+entrycode);
 });
 
 module.exports = route;

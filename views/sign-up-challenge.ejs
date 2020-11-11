@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BufferOverflow - Welcome-Challenge</title>
+    <link rel="stylesheet" href="/css/style_sign-up-challenge.css">
+</head>
+<body>
+    <section id="hackme">
+        <section id="challenge">
+            <div id="quote">
+                <h3>Hack this webpage to get the secret code.</h3>
+            </div>
+            <form action="/user/hackmein/ihavethecode" id="submission" method="POST">
+                <div style="display: flex; align-items: center; height: 20px; font-size: 15px; margin-bottom: 5px;">
+                    <p style="color: #ef2929"><%= error %></p>
+                </div>
+                <h3>Hacked Code</h3>
+                <input type="text" id="code" placeholder="" name="code"> 
+                <div id="nav">
+                    <button type="button" id="stuck">GET A HELP!</button>
+                    <button name="submit" id="submit">Submit</button>
+                </div>
+            </form>
+        </section>
+    </section>
+    <script src="/js/js_challenge.js"></script>
+    <script src="/js/js_suspicious.js"></script>
+</body>
+</html>

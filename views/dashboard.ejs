@@ -4,11 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BufferOverflow - Dashboard</title>
+    <link rel="stylesheet" href="/css/style_dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <h3>Welcome! Come in.</h3>
-    <form action="/user/logout" method="POST">
-        <button type="submit">LOGOUT</button>
-    </form>
+    <header>
+        <div id="logo"><h3>HACK NASA WITH HTML</h3></div>
+        <nav id="menu">
+            <ul>
+                <li><a class="links" href="https://www.nitj.ac.in/">NITJ</a></li>
+                <li><a class="links" href="">Start here</a></li>
+                <li><a class="links" href="">Leaderboard</a></li>
+                <li><a class="links" href="">Contest</a></li>
+                <li><a class="links" href="">Mentors</a></li>
+            </ul>
+            <% if(!verified){ %>
+                <button id="challenge" onclick="document.location='/user/sign-up-challenge'">Sign-up challenge</button>
+            <% } else{ %>
+                <button id="challengeSolved">Solved</button>
+            <% } %>
+        </nav>
+        <div id="profile">
+            <div id="profile_name" onclick="location.href='http://bufferoverflow.com/user/profile'">
+                <h3> <%= username %></h3>
+                <h3>Rating: <%= rating %></h3>
+            </div>
+        </div>
+    </header>
 </body>
 </html>

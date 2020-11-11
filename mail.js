@@ -2,7 +2,9 @@ require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 var transport = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp-relay.sendinblue.com',
+    port: 587,
+    secure: false,
     auth: {
       user: process.env.NODEMAILER_EMAIL,
       pass: process.env.NODEMAILER_PASSWORD
@@ -10,7 +12,7 @@ var transport = nodemailer.createTransport({
 });
 
 var options = {
-    from: "annonymous@kyapata.com",
+    from: "noreply@bufferoverflow.com",
     to: '',
     subject: "Testing purposes",
     text: "Testing purposes",
@@ -30,7 +32,7 @@ module.exports = {
         options.subject = "Password reset request."
         options.text = `This email is send to reset your password. If you have not requested this email, someone 
         is trying to hack into your account.\nThat's OK. They never can or can they? :)\nAnyway if you have requested the password-reset, 
-        here is your password reset link:` + 'bufferoverflow.com\\roasting\\' + link;
+        here is your password reset link:\n` + 'http://bufferoverflow.com/roasting/' + link;
         transport.sendMail(options, (err, info)=>{
             if(err) console.log("Error sending forgot-password email. Error: "+err);
             else console.log("Mail send successfully. Mail:\n"+info);

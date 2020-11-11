@@ -27,10 +27,12 @@ let schema = new mongoose.Schema({
     },
     verified: {
         type: Boolean,
+        required: true,
         default: false
     },
     rating: {
         type: Number,
+        required: true,
         default: 0
     }
 });

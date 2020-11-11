@@ -1,53 +1,47 @@
 const route = require('express').Router();
 const jwt = require('jsonwebtoken');
 const Refresh_token = require('../models/refresh');
+const Parcel = require('../models/parcel');
+const User = require('../models/user');
 
 function authenticateToken(req, res, next){
-    const token = req.cookies && req.cookies.dontseethis;
-    if(token == null){ req.verification = false; next(); return; }
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decodedToken)=>{
-        try{
-            if(err){
-                //The token is either expired or tampered with or some unknown reason is here
-                if(err.name === 'JsonWebTokenError'){ //If this is called, that means that our token is tampered with or corrupted or something of that sort. 
+    if(typeof req.cookies === 'undefined' || typeof req.cookies.dontseethis === 'undefined' || typeof req.cookies.icantseeyou === 'undefined'){
+        console.log("Redirected to login");
+        req.verification = false; next(); return;
+    }
+    let accessToken = req.cookies.dontseethis;
+    let refreshToken = req.cookies.icantseeyou;
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, async (err, access_token_decoded) =>{
+        if(err){ //Access token is incorrect or malformed or expired 
+            //If the refresh token is correct, we will give a new access token and entry to the user
+            jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, refresh_token_decoded)=>{
+                if(err){
                     req.verification = false; 
-                    next(); 
+                    next();
+                    return; 
+                } else{
+                    //Generate a new access token and send it to the client
+                    const currentUser = await User.findOne({username: refresh_token_decoded.username});
+                    console.log(currentUser);
+                    console.log(currentUser.username);
+                    const new_access_token = jwt.sign({username: currentUser.username, rating: currentUser.rating, verified: currentUser.verified}, process.env.ACCESS_TOKEN_SECRET, {algorithm: 'HS256', expiresIn: '1m'});
+                    res.cookie('dontseethis', new_access_token, {secure: false, httpOnly: true, path: '/', sameSite: true});
+                    req.verification = true; 
+                    req.username = refresh_token_decoded.username;
+                    req.rating = currentUser.rating;
+                    req.verified = currentUser.verified;
+                    next();
                     return;
-                } else{ //Token has expired;
-                     //Let's check the refresh token and make a new ACESS_TOKEN
-                    const refreshToken = req.cookies.icantseeyou;
-                    //User don't have a refresh token
-                    if(refreshToken == null){ req.verification = false; next(); return; }
-                    let user_refresh_token = await Refresh_token.findOne({token: refreshToken});
-                    user_refresh_token = user_refresh_token && user_refresh_token.token;
-                    //The refresh token send by the user is not valid.
-                    if(!user_refresh_token){ req.verification = false; next(); return; }
-                    //All great till now. User has a refresh token and is valid in database.
-                    //Now we need to check if it's not expired or anything.
-                    jwt.verify(user_refresh_token, process.env.REFRESH_TOKEN_SECRET, async(err, token)=>{
-                        if(err){//If anything fails here, just go to login.
-                            console.log(err);
-                            await Refresh_token.remove({token: user_refresh_token});
-                            req.verification = false;
-                            next(); 
-                            return; 
-                        }
-                        //Now the token is valid and we can create a new access token
-                        const newAccessToken = jwt.sign({username: token.username}, process.env.ACCESS_TOKEN_SECRET, {algorithm: 'HS256', expiresIn: '1m'});
-                        res.cookie('dontseethis', newAccessToken, {path: '/', httpOnly: true, secure: false,  sameSite: 'strict'});
-                        //console.log("New access token defined");
-                        req.verification = true;
-                    });
                 }
-            } else{
-                req.verification = true;
-            }
-            req.username = token && token.username;
-            next();
-            return;
-        } catch (err){
-            console.log(err);
-            req.verification = false;
+            });
+            
+        } else{ //If the token is valid
+            req.verification = true;
+            req.username = access_token_decoded.username;
+            console.log(access_token_decoded);
+            const currentUser = await User.findOne({username: req.username});
+            req.rating = currentUser.rating;
+            req.verified = currentUser.verified;
             next();
             return;
         }
@@ -56,7 +50,7 @@ function authenticateToken(req, res, next){
 
 route.get('/dashboard', authenticateToken, (req, res)=>{
     if(!req.verification) return res.redirect('/login');
-    res.render('dashboard.ejs');
+    res.render('dashboard.ejs', {username: req.username, rating: req.rating, verified: req.verified});
 });
 
 route.post('/logout', authenticateToken , async (req, res)=>{
@@ -64,7 +58,7 @@ route.post('/logout', authenticateToken , async (req, res)=>{
     if(!req.verification) return res.redirect('/login');
     const refresh_token = req.cookies.icantseeyou;
     await Refresh_token.deleteOne({token: refresh_token});
-    res.cookie('dontseethis', "", {path: '/', httpOnly: true, secure: false,  sameSite: 'strict'}).redirect('/login');
+    res.cookie('dontseethis', "", {path: '/', httpOnly: true, secure: false,  sameSite: 'strict'}).cookie('icantseeyou', "", {path: '/', httpOnly: true, secure: false,  sameSite: 'strict'}).redirect('/login');
 });
 
 route.post('/password-reset', authenticateToken, (req, res)=>{
@@ -74,7 +68,27 @@ route.post('/password-reset', authenticateToken, (req, res)=>{
 });
 
 route.get('/profile', authenticateToken, async (req, res)=>{
-    
+    res.render('profile.ejs');
 });
+
+route.post('/hackmein/ihavethecode', authenticateToken, async (req, res)=>{
+    const code = req.body.code; 
+    let entrycode = await Parcel.findOne({code}); 
+    if(!entrycode){
+        res.render('sign-up-challenge.ejs', {error: 'We will give you another chance :)'});
+        return res.redirect('/user/sign-up-challenge');
+    } else{
+        const current_user = await User.findOne({username: req.username});
+        current_user.verified = true;
+        current_user.rating = current_user.rating + 200;
+        current_user.save().then().catch(()=>console.log("Cannot update value")); 
+        await Parcel.deleteOne({code});
+        res.redirect('/user/dashboard');
+    }
+});
+
+route.get('/sign-up-challenge', authenticateToken, (req, res)=>{
+    res.render('sign-up-challenge.ejs', {error: 'Hacking is fun :)'});
+})
 
 module.exports = route;
