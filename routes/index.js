@@ -67,7 +67,7 @@ route.post('/register', checkLogIn, async (req, res)=>{
         return res.render('register.ejs', {error: "All fields are required", username, password, email, roll_no, year, college});
     if(password.length < 6) return res.render('register.ejs', {error: "Password at least 6 characters long.", username, password, email, roll_no, year, college});
     if(year<1 || year>4) return res.render('register.ejs', {error: "Are you sure that year is possible?", username, password, email, roll_no, year, college});
-    if(roll_no.length !== 8) return res.render('register.ejs', {error: "Ambiguous Roll Number detected.", username, password, email, roll_no, year, college});
+    if(roll_no.length < 6) return res.render('register.ejs', {error: "Ambiguous Roll Number detected.", username, password, email, roll_no, year, college});
     try{
         const userSearch = await User.findOne({username: username});
         const emailSearch = await User.findOne({email: email});
