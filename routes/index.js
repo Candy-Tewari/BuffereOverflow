@@ -119,16 +119,16 @@ route.get('/mentors', (req, res)=>{
     mentors = [
         {
             name: 'Akash Chhabra', 
-            imglink: '/images/mentor_1.jpg', 
-            linkedinlink: 'https://www.linkedin.com/in/akashchhabra710/', 
-            portfoliolink: 'https://www.linkedin.com/in/akashchhabra710/',
+            imglink: '/images/none_mentor.jpg', 
+            linkedinlink: '', 
+            portfoliolink: '',
             charge: '10$/hr' 
         },
         {
             name: 'Shobhit Tewari',
             imglink: '/images/none_mentor.jpg', 
-            linkedinlink: 'https://www.linkedin.com/in/akashchhabra710/',
-            portfoliolink: 'https://www.linkedin.com/in',
+            linkedinlink: 'https://www.linkedin.com/in/shobhit-tewari-697003167/',
+            portfoliolink: 'https://www.codechef.com/users/shobhit01',
             charge: '5$/hr'
         },
         {
