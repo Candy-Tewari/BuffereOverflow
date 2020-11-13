@@ -68,7 +68,8 @@ route.post('/password-reset', authenticateToken, (req, res)=>{
 });
 
 route.get('/profile', authenticateToken, async (req, res)=>{
-    res.render('profile.ejs');
+    const current_user = await User.findOne({username: req.username}); 
+    res.render('profile.ejs', {username: current_user.username, rating: current_user.rating, signup: current_user.verified, college: current_user.college, year: current_user.year, branch: current_user.branch, email: current_user.email, password: '************'});
 });
 
 route.post('/hackmein/ihavethecode', authenticateToken, async (req, res)=>{

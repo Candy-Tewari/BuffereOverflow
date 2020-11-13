@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BufferOverflow - Mentors</title>
+    <link rel="stylesheet" href="/css/style_mentors.css">
+    <link rel="stylesheet" href="css/partials/header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+
+    <%- include('partials/header.ejs') %>
+
+    <section id="page_format"> 
+        <h3 class="starter">Get a quick boost by getting a helping hand from our mentors.</h3>
+        <section id="mentors">
+
+            <% mentors.forEach((item)=>{ %>
+                <div class="list_mentors">
+                    <div class="basic_info">
+                        <img class= "profile_pic" alt="Mentor 1" src="<%= item.imglink %>">
+                        <h3> <%= item.name %> </h3>
+                    </div>
+                    <div class="links">
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <h3 class="input linkedin"  value="<%= item.linkedinlink %>"><%= item.name %></h3>
+                        </div>
+                        <div>
+                            <h3>Portfolio</h3>
+                            <h3 class="input portfolio" value="<%= item.portfoliolink %>"><%= item.name %></h3>
+                        </div>
+                    </div>
+                    <div class="fees">
+                        <h3>Fee: <%= item.charge %> </h3>
+                        <button class="apply">Apply now!</button>
+                    </div>
+                </div>
+            <% }) %>
+
+        </section>
+    </section>
+    <script src="/js/js_mentor_links.js"></script>
+</body>
+</html>

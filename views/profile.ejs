@@ -4,11 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BufferOverflow - Profile</title>
+    <link rel="stylesheet" href="/css/style_profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <h3>Welcome! Come in.</h3>
-    <form action="http://bufferoverflow.com/user/logout" method="POST">
-        <button type="submit">LOGOUT</button>
-    </form>
+    <section id="page_set_up">
+        <section id="info_form">
+
+            <div id="profile_name">
+                <h3> <%= username %> </h3>
+            </div>
+            
+            <div class="information">
+                <h3>Rating</h3> 
+                <input type="text" readonly placeholder="<%= rating %>" >
+            </div>
+
+            <div class="information">
+                <h3>Sign-up challenge</h3> 
+                <% if(!signup){ %>
+                    <button id="challenge" onclick="document.location='/user/sign-up-challenge'">Unsolved</button>
+                <% } else{ %>
+                    <button id="challengeSolved">Solved</button>
+                <% } %>
+            </div>
+
+            <div class="information">
+                <h3>College</h3> 
+                <input type="text" readonly placeholder="<%= college %>" >
+            </div>
+
+            <div class="information"> 
+                <div id="smallbusiness">
+                    <div class="half_information">
+                        <h3>Year</h3> 
+                        <input type="text" readonly placeholder="<%= year %>" >
+                    </div>
+                    <div class="half_information">
+                        <h3>Branch</h3> 
+                        <input type="text" readonly placeholder="<%= branch %>" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="information">
+                <h3>Email</h3> 
+                <input type="text" readonly placeholder="<%= email %>" >
+            </div>
+
+            <div class="information">
+                <h3>Password</h3> 
+                <input type="password" readonly placeholder="<%= password %>" >
+            </div>
+
+            <div id="informationButtons">
+                <button id="challengeSolved">Edit</button>
+                <form action="http://bufferoverflow.com/user/logout" method="POST" id="logout">
+                    <button id="challenge" type="submit">Logout</button>
+                </form>
+            </div>
+
+        </section>
+    </section>
 </body>
 </html>
