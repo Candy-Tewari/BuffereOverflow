@@ -142,7 +142,7 @@ route.get('/mentors', (req, res)=>{
             name: 'Gaurang Gupta',
             imglink: '/images/none_mentor.jpg',
             linkedin: 'https://www.linkedin.com/in',
-            portfoliolink: 'https://www.linkedin.com/in',
+            portfoliolink: 'https://www.codechef.com/users/gaurang2200',
             charge: '5$/hr',
         },
         {
