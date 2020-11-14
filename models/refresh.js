@@ -13,7 +13,7 @@ let schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    expiresAt: {
+    createdAt: {
         type: Date,
         default: Date.now,
         expires: '30d' 
