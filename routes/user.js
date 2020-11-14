@@ -11,6 +11,7 @@ function authenticateToken(req, res, next){
     }
     let accessToken = req.cookies.dontseethis;
     let refreshToken = req.cookies.icantseeyou;
+
     jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, async (err, access_token_decoded) =>{
         if(err){ //Access token is incorrect or malformed or expired 
             //If the refresh token is correct, we will give a new access token and entry to the user

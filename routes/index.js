@@ -122,35 +122,42 @@ route.get('/mentors', (req, res)=>{
             imglink: '/images/none_mentor.jpg', 
             linkedinlink: '', 
             portfoliolink: '',
-            charge: '10$/hr' 
+            charge: '50$/hr' 
+        },
+        {
+            name: 'Gagan Sroay',
+            imglink: '/images/none_mentor.jpg',
+            linkedinlink: '', 
+            portfoliolink: '',
+            charge: '42$/hr' 
         },
         {
             name: 'Shobhit Tewari',
             imglink: '/images/none_mentor.jpg', 
             linkedinlink: 'https://www.linkedin.com/in/shobhit-tewari-697003167/',
             portfoliolink: 'https://www.codechef.com/users/shobhit01',
-            charge: '5$/hr'
+            charge: '15$/hr'
         },
         {
             name: 'Vikas Sandhu',
             imglink: '/images/none_mentor.jpg',
             linkedinlink: 'https://www.linkedin.com/in',
             portfoliolink: 'https://www.linkedin.com/in',
-            charge: '5$/hr'
+            charge: '30$/hr'
         },
         {
             name: 'Gaurang Gupta',
             imglink: '/images/none_mentor.jpg',
             linkedin: 'https://www.linkedin.com/in',
             portfoliolink: 'https://www.codechef.com/users/gaurang2200',
-            charge: '5$/hr',
+            charge: '25$/hr',
         },
         {
             name: 'Aadamya Misra',
             imglink: '/images/none_mentor.jpg',
             linkedin: 'https://www.linkedin.com',
             portfoliolink: 'https://www.',
-            charge: '5$/hr',
+            charge: '0$/hr',
         }
     ];
     res.render('mentors.ejs', {mentors});
