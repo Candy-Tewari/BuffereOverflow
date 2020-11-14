@@ -9,7 +9,7 @@ const crypto = require('crypto');
 const Parcel = require('../models/parcel');
 
 function checkLogIn(req, res, next){
-    if(typeof req.cookies === 'undefined' || typeof req.cookies.icantseeyou === 'undefined'){req.alreadyauser = false; next(); return;}
+    if(typeof req.cookies === 'undefined' || typeof req.cookies.icantseeyou === 'undefined' || typeof req.cookies.dontseethis === 'undefined'){req.alreadyauser = false; next(); return;}
     const refreshToken = req.cookies.icantseeyou;
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, refresh_token_decoded)=>{
         if(err){req.alreadyauser = false; next(); return;} 
