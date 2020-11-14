@@ -5,10 +5,18 @@ let schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
     expiresAt: {
         type: Date,
         default: Date.now,
-        expires: '30d' //30 days 24hours 60 minutes 60 seconds
+        expires: '30d' 
     }
 });
 

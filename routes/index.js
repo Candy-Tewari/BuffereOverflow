@@ -49,7 +49,7 @@ route.post('/login', checkLogIn, async (req, res)=>{
             const accessToken = jwt.sign({username: currUser.username, rating: currUser.rating, verified: currUser.verified}, process.env.ACCESS_TOKEN_SECRET, {algorithm: "HS256", expiresIn: '1m'});
             const refresh_token = jwt.sign({username: currUser.username, rating: currUser.rating, verified: currUser.verified}, process.env.REFRESH_TOKEN_SECRET, {algorithm: "HS256", expiresIn: '30d'});
             res.cookie('dontseethis', accessToken, {path: '/', httpOnly: true, secure: false,  sameSite: 'strict'}).cookie('icantseeyou', refresh_token, {path: '/', httpOnly: true, secure: false, sameSite: 'strict'}).redirect('/user/dashboard');
-            let newRefreshToken = new Refresh_token({token: refresh_token});
+            let newRefreshToken = new Refresh_token({token: refresh_token, username: currUser.username, email});
             newRefreshToken.save().then(()=>console.log('Refresh token saved successfully')).catch((err)=>console.log('Error saving refresh token'));
         } else{
             res.render('login.ejs', {error: "Incorrect username or password!"});
