@@ -7,7 +7,7 @@ let schema = new mongoose.Schema({
     },
     expiresAt: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
         index: { expires: 30*24*60*60 }, //30 days 24hours 60 minutes 60 seconds
     }
 });
