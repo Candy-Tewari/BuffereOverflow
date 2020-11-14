@@ -16,7 +16,7 @@ let schema = new mongoose.Schema({
     createAt: {
         type: Date,
         default: Date.now(),
-        index: { expires: '10,' } 
+        index: { expires: '10m' } 
     }
 });
 
