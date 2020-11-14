@@ -15,7 +15,7 @@ let schema = new mongoose.Schema({
     },
 });
 
-schema.index({expireAt: 1}, {expiresAfterSeconds: '10m'});
+schema.index({expireAt: 1}, {expiresAfterSeconds: 240}); //4 mins * 60 seconds
 
 let model =  mongoose.model('refresh_token', schema);
 
