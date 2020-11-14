@@ -13,10 +13,10 @@ let schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    createdAt: {
+    createAt: {
         type: Date,
-        default: Date.now,
-        expires: '10m' 
+        default: Date.now(),
+        index: { expires: '10,' } 
     }
 });
 
