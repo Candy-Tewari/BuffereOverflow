@@ -19,7 +19,7 @@ let schema = new mongoose.Schema({
     }
 });
 
-schema.index({"createdAt": 1}, {expireAfterSeconds: 240}); //4 mins * 60 seconds
+schema.index({"createdAt": 1}, {expireAfterSeconds: 2592000}); //30days * 24hours * 60 minutes * 60 seconds
 
 let model =  mongoose.model('token', schema);
 

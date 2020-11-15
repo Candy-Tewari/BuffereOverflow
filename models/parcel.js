@@ -5,12 +5,13 @@ const schema = new mongoose.Schema({
         type: 'string',
         required: true,
     },
-    expiresAt: {
+    createdAt: {
         type: Date,
-        default: Date.now(),
-        index: { expires: '10m' }
+        default: new Date()
     }
 });
+
+schema.index({"createdAt": 1}, {expireAfterSeconds: 600}); //10 minutes * 60 seconds
 
 const model = mongoose.model('parcel', schema);
 
