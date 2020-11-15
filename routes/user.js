@@ -4,7 +4,7 @@ const Refresh_token = require('../models/refresh');
 const Parcel = require('../models/parcel');
 const User = require('../models/user');
 
-function authenticateToken(req, res, next){
+async function authenticateToken(req, res, next){
     if(typeof req.cookies === 'undefined' || typeof req.cookies.dontseethis === 'undefined' || typeof req.cookies.icantseeyou === 'undefined'){
         console.log("Redirected to login");
         req.verification = false; next(); return;
