@@ -13,13 +13,13 @@ let schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    expireAt: {
+    createdAt: {
         type: Date,
         default: new Date()
     }
 });
 
-schema.index({"expireAt": 1}, {expireAfterSeconds: 60}); //4 mins * 60 seconds
+schema.index({"createdAt": 1}, {expireAfterSeconds: 60}); //4 mins * 60 seconds
 
 let model =  mongoose.model('refresh_token', schema);
 
