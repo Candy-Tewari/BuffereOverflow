@@ -21,6 +21,6 @@ let schema = new mongoose.Schema({
 
 schema.index({"createdAt": 1}, {expireAfterSeconds: 60}); //4 mins * 60 seconds
 
-let model =  mongoose.model('refresh_token', schema);
+let model =  mongoose.model('token', schema);
 
 module.exports = model;
