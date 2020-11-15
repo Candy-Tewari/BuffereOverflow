@@ -8,9 +8,11 @@ const mail = require('../mail');
 const crypto = require('crypto');
 const Parcel = require('../models/parcel');
 
-function checkLogIn(req, res, next){
+async function checkLogIn(req, res, next){
     if(typeof req.cookies === 'undefined' || typeof req.cookies.icantseeyou === 'undefined' || typeof req.cookies.dontseethis === 'undefined'){req.alreadyauser = false; next(); return;}
     const refreshToken = req.cookies.icantseeyou;
+    const refresh_token_in_database = await User.findOne({token: refresh_token});
+    if(!refresh_token_in_database) {req.alreadyauser = false; next(); return;}
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, refresh_token_decoded)=>{
         if(err){req.alreadyauser = false; next(); return;} 
         else{req.alreadyauser = true; next(); return;}
