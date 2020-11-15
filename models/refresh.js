@@ -13,6 +13,10 @@ let schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    expireAt: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 schema.index({expireAt: 1}, {expiresAfterSeconds: 240}); //4 mins * 60 seconds
