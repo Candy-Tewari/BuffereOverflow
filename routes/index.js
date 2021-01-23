@@ -170,4 +170,11 @@ route.get('/responsive_warning', (req, res)=>{
     res.render('responsive_warning.ejs');
 });
 
+
+route.get('/leaderboard',async (req,res)=>{
+    ranklist=await User.find({},{username:1,college:1,rating:1}).sort({rating:'desc'});
+    res.render('leaderboard.ejs',{ranklist:ranklist});
+});
+
+
 module.exports = route;
