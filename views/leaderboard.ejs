@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BufferOverflow - NITJ</title>
+    <link rel="stylesheet" href="css/partials/header.css">
+    <link rel="stylesheet" href="css/style_leaderboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet"> 
+</head>
+
+<body>
+    <%- include('partials/header.ejs') %>
+    <div class="container">
+        <h1 class="title">Leaderboard</h1>
+        <table>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>College</th>
+            <% for(let i=0;i<ranklist.length;i++)  {%>
+                <tr>
+                    <td><%= i+1%></td>
+                    <td><%= ranklist[i].username %></td>
+                    <td><%= ranklist[i].rating %></td>
+                    <td><%= ranklist[i].college %></td>
+                </tr>
+            <%}%>
+        </table>
+    </div>
+    <script src="/js/js_responsive_check.js"></script>
+    <script src="js/js_index.js"></script>
+</body>
+
+</html>
